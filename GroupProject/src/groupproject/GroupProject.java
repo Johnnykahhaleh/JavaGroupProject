@@ -22,8 +22,38 @@ public String getLastName()
 return lastName;
 }
 // return student college ID
-public String collegeId()
+public String getCollegeId()
 {
 return collegeId;
+}
+
+public class MonthlyPay extends GroupProject
+{
+private double Monthlypay;
+// constructor
+public MonthlyPay(String firstName, String lastName,String collegeId, double Monthlypay)
+{super(firstName, lastName,collegeId);
+if (Monthlypay < 0.0)
+throw new IllegalArgumentException("Weekly salary must be >= 0.0");
+    this.Monthlypay = Monthlypay;
+}
+// set salary
+
+public void Monthlypay(double Monthlypay)
+{
+if (Monthlypay < 0.0)
+throw new IllegalArgumentException("Weekly salary must be >= 0.0");
+    this.Monthlypay = Monthlypay;
+}
+// return salary
+public double getMonthlypay()
+{
+return Monthlypay;
+}
+// calculate earnings; override abstract method earnings in Employee
+public double earnings()
+{
+return getMonthlypay();
+}
 }
 }
