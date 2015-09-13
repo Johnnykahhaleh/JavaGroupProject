@@ -29,7 +29,7 @@ private double Monthlypay;
 private int NbrMonth;
 // constructor
 public MonthlyPay(String firstName, String lastName,String collegeId, double Monthlypay, int NbrMonth)
-{super(firstName, lastName,collegeId);
+{super.Student(firstName, lastName,collegeId);
    if (Monthlypay < 0.0)
    throw new IllegalArgumentException("Payment must be >= 0.0");
 
@@ -69,7 +69,7 @@ private double ModuleCost;
 private int NbrModule;
 // constructor
 public ModulePay(String firstName, String lastName,String collegeId, double ModuleCost, int NbrModule)
-{super(firstName, lastName,collegeId);
+{super.Student(firstName, lastName,collegeId);
    if (ModuleCost < 0.0)
    throw new IllegalArgumentException("Cost must be >= 0.0");
 
