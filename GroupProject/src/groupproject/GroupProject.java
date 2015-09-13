@@ -30,30 +30,38 @@ return collegeId;
 public class MonthlyPay extends GroupProject
 {
 private double Monthlypay;
+private int NbrMonth;
 // constructor
-public MonthlyPay(String firstName, String lastName,String collegeId, double Monthlypay)
+public MonthlyPay(String firstName, String lastName,String collegeId, double Monthlypay, int NbrMonth)
 {super(firstName, lastName,collegeId);
-if (Monthlypay < 0.0)
-throw new IllegalArgumentException("Weekly salary must be >= 0.0");
-    this.Monthlypay = Monthlypay;
+   if (Monthlypay < 0.0)
+   throw new IllegalArgumentException("Payment must be >= 0.0");
+
+    if (NbrMonth<=0)
+    throw new IllegalArgumentException("Number of months must be >0");
+this.NbrMonth = NbrMonth;
+this.Monthlypay=Monthlypay;
 }
 // set salary
 
 public void Monthlypay(double Monthlypay)
 {
 if (Monthlypay < 0.0)
-throw new IllegalArgumentException("Weekly salary must be >= 0.0");
+throw new IllegalArgumentException("Payment must be >= 0.0");
     this.Monthlypay = Monthlypay;
+}
+public void NbrMonth(int NbrMonth)
+{
+if (NbrMonth <=0)
+throw new IllegalArgumentException("Number of Months must be >0");
+    this.NbrMonth = NbrMonth;
 }
 // return salary
 public double getMonthlypay()
-{
-return Monthlypay;
-}
-// calculate earnings; override abstract method earnings in Employee
+{return Monthlypay;}
+
 public double earnings()
-{
-return getMonthlypay();
-}
+{return getMonthlypay();}
+
 }
 }
