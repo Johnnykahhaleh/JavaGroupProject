@@ -22,6 +22,11 @@ public String getLastName()
 // return student college ID
 public String getCollegeId()
 {return collegeId;}
+@Override
+public String toString()
+{return String.format("%s %s College ID is: %s",getFirstName(), getLastName(), getCollegeId());}
+
+public abstract double TotalPay();
 
 public class MonthlyPay extends GroupProject
 {
@@ -59,10 +64,15 @@ public double getMonthlypay()
 public int getNbrmonth()
 {return NbrMonth;}
 
+@Override
 public double TotalPay()
-{return getMonthlypay();}
+{return getMonthlypay()*getNbrmonth();}
 
+@Override
+public String toString()
+{return String.format("Monthly paymnet should be: %s%n%s: $%,.2f",super.toString(), "Monthly payment", getMonthlypay());}
 }
+
 public class ModulePay extends GroupProject
 {
 private double ModuleCost;
@@ -93,13 +103,72 @@ throw new IllegalArgumentException("Number of modules must be >0");
     this.NbrModule = NbrModule;
 }
 // return salary
-public double getMonthlypay()
+public double getModuleCost()
 {return ModuleCost;}
 
-public int getNbrmonth()
+public int getModule()
 {return NbrModule;}
 
+@Override
 public double TotalPay()
-{return getMonthlypay();}
+{return getModuleCost()*getModule();}
+@Override
+public String toString()
+{return String.format("per Module paymnet should be: %s%n%s: $%,.2f",super.toString(), "Modules Cost", TotalPay());}
+}
+public class DiscountStd extends GroupProject
+{
+private double ModuleCost;
+private int NbrModule;
+private double DiscPerc;
+// constructor
+public DiscountStd(String firstName, String lastName,String collegeId, double ModuleCost, int NbrModule, double DiscPerc)
+{super.Student(firstName, lastName,collegeId);
+if (DiscPerc < 0.0||DiscPerc>80.0)
+   throw new IllegalArgumentException("Discount cannot be over 80 or less than 0");
+
+    if (ModuleCost < 0.0)
+    throw new IllegalArgumentException("Cost must be >= 0.0");
+
+        if (NbrModule<=0)
+        throw new IllegalArgumentException("Number of months must be >0");
+        
+this.NbrModule = NbrModule;
+this.ModuleCost=ModuleCost;
+this.DiscPerc=DiscPerc;
+}
+// set salary
+
+public void ModuleCost(double ModuleCost)
+{
+if (ModuleCost < 0.0)
+throw new IllegalArgumentException("Cost must be >= 0.0");
+    this.ModuleCost = ModuleCost;
+}
+public void NbrModule(int NbrModule)
+{
+if (NbrModule <=0)
+throw new IllegalArgumentException("Number of modules must be >0");
+    this.NbrModule = NbrModule;
+}
+// return salary
+public double getModuleCost()
+{return ModuleCost;}
+
+public double getDiscPerc()
+{return DiscPerc;}
+
+public int getModule()
+{return NbrModule;}
+
+public double DiscVal()
+{return (getModuleCost()*getModule())*getDiscPerc()/100;}
+
+@Override
+public double TotalPay()
+{return (getModuleCost()*getModule())-DiscVal();}
+@Override
+public String toString()
+{return String.format("per Module paymnet should be: %s%n%s: $%,.2f",super.toString(), "After deducting Discount", TotalPay());}
 }
 }
